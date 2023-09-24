@@ -15,7 +15,6 @@ class CelestialBody {
         stroke(255,255,0);
         strokeWeight(0);
         texture(this.map);
-        sphere(this.radius/100,50,50);        
+        sphere(this.radius/20,50,50);        
     }
       }
-    
