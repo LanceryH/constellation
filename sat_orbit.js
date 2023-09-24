@@ -50,7 +50,7 @@ class Orbit {
   plotOrbit() {
     //scale(0.01);
     stroke(255);
-    strokeWeight(1);
+    //strokeWeight(1);
     noFill();
     beginShape();
     for (let i = 0; i < this.TRUE_ANOMALY_LIST.length; i++) {
