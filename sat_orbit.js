@@ -27,7 +27,7 @@ class Orbit {
     );
   }
   true_anomaly() {
-    const n = 100;
+    const n = 200;
     if (n <= 1) {
       return [0]; // Special case for n = 1
     }

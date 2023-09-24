@@ -1,5 +1,5 @@
 let bg;
-var zoom = 0.006;
+var zoom = 0.004;
 var zMin = 0.00001;
 var zMax = 1.0;
 var sensativity = 0.000005;
@@ -41,6 +41,8 @@ function draw() {
   scale(zoom);
   //rotateY(millis() / 100);
   //sky.show();
+  rotateY(millis() / 10000);
+  rotateX(millis() / 10000);
   earth.show();
   for (let index = 0; index < list_object.length; index++) {
     strokeWeight(1);
@@ -53,4 +55,11 @@ function mouseWheel(event) {
   zoom = constrain(zoom, zMin, zMax);
   //uncomment to block page scrolling
   return false;
+}
+
+function keyPressed() {
+  // this will download the first 5 seconds of the animation!
+  if (key === "s") {
+    saveGif("mySketch", 3);
+  }
 }
