@@ -49,7 +49,7 @@ class Orbit {
   }
   plotOrbit() {
     //scale(0.01);
-    stroke(255);
+    //stroke(255);
     //strokeWeight(1);
     noFill();
     beginShape();
