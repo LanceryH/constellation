@@ -13,6 +13,7 @@ let list_object_2 = {};
 let list_object = [];
 
 function setup() {
+  console.log(Object.keys(data).length);
   earth = new CelestialBody(
     "Earth",
     loadImage("map_earth.jpg"),
@@ -28,7 +29,7 @@ function setup() {
   //sky = new CelestialBody("Sky", loadImage("map_star.jpg"), 0, 80e4);
   createCanvas(windowWidth, windowHeight, WEBGL);
   console.log(data[0]);
-  for (let index = 0; index < 300; index++) {
+  for (let index = 0; index < 200; index++) {
     sel.position(10, 10);
     sel.option(data[index].OBJECT_NAME);
     sel.changed(mySelectEvent_listbox);

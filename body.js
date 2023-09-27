@@ -8,7 +8,7 @@ class CelestialBody {
   show() {
     strokeWeight(0);
     texture(this.map);
-    sphere(this.radius, 24, 24);
+    sphere(this.radius, 50, 50);
   }
   show_north_south() {
     stroke(255, 0, 0);
