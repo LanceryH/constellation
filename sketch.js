@@ -1,8 +1,8 @@
 let bg;
-var zoom = 0.004;
+var zoom = 0.03;
 var zMin = 0.00001;
 var zMax = 1.0;
-var sensativity = 0.000005;
+var sensativity = 0.00005;
 
 function preload() {
   data = loadJSON("data.json");
@@ -28,6 +28,7 @@ function setup() {
   sel = createSelect();
   //sky = new CelestialBody("Sky", loadImage("map_star.jpg"), 0, 80e4);
   createCanvas(windowWidth, windowHeight, WEBGL);
+
   console.log(data[0]);
   for (let index = 0; index < 200; index++) {
     sel.position(10, 10);
@@ -54,17 +55,24 @@ function draw() {
   //orbitControl();
   orbitControl(1, 1, 0);
   scale(zoom);
-  //rotateY(millis() / 100);
+
   //sky.show();
+  strokeWeight(1);
+  stroke(255);
+  rotateY(0);
+  list_object_2[sel.value()].plotOrbit();
+
+  strokeWeight(1);
+  stroke(255);
+  texture(map_earth);
   rotateY(millis() / 10000);
-  //rotateX(millis() / 10000);
   earth.show();
+
+  vals = list_object_2[sel.value()].calculateFootprint();
+
   if (checkbox.checked()) {
     earth.show_north_south();
   }
-  strokeWeight(1);
-  stroke(255);
-  list_object_2[sel.value()].plotOrbit();
 }
 
 function mouseWheel(event) {

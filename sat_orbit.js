@@ -47,10 +47,11 @@ class Orbit {
     const z = r * Math.sin(theta) * Math.sin(this.INCLINATION);
     return [x, y, z];
   }
+
   plotOrbit() {
     //scale(0.01);
-    //stroke(255);
-    //strokeWeight(1);
+    strokeWeight(1);
+    stroke(255);
     noFill();
     beginShape();
     for (let i = 0; i < this.TRUE_ANOMALY_LIST.length; i++) {
@@ -61,5 +62,25 @@ class Orbit {
       vertex(x, y, z);
     }
     endShape(CLOSE);
+  }
+  calculateFootprint() {
+    // Assuming your orbit is geocentric, you can calculate the footprint
+    // by projecting each point on the orbit's trajectory onto the Earth's surface.
+
+    const footprint = [];
+
+    for (let i = 0; i < this.TRUE_ANOMALY_LIST.length; i++) {
+      const r = this.RADIAL_DISTANCE_LIST[i];
+      const theta = this.TRUE_ANOMALY_LIST[i];
+      const [x, y, z] = this.polar_to_cartesian(r, theta);
+
+      // Calculate latitude and longitude from Cartesian coordinates
+      const latitude = Math.asin(z / this.EARTH_RADIUS) * (180 / Math.PI);
+      const longitude = Math.atan2(y, x) * (180 / Math.PI);
+
+      footprint.push({ latitude, longitude });
+    }
+
+    return footprint;
   }
 }
