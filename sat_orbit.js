@@ -4,7 +4,7 @@ class Orbit {
     this.MUE = 3.986e5;
     this.EARTH_MASS = 5.972e24;
     this.EARTH_RADIUS = 6371;
-    this.N = 200;
+    this.N = 100;
     this.MEAN_MOTION = MEAN_MOTION;
     this.ECCENTRICITY = ECCENTRICITY;
     this.INCLINATION = INCLINATION;
@@ -14,6 +14,10 @@ class Orbit {
     this.SEMI_LATUS_RECTUM = this.semi_latus_rectum();
     this.TRUE_ANOMALY_LIST = this.true_anomaly();
     this.RADIAL_DISTANCE_LIST = this.radial_distance();
+    this.SPEED = this.speed();
+  }
+  speed() {
+    return Math.sqrt((2 * this.MUE) / this.SEMI_LATUS_RECTUM);
   }
   mean_motion_si() {
     return (2 * Math.PI) / this.PERIOD_ORBIT;
@@ -31,7 +35,6 @@ class Orbit {
     const step = (2 * Math.PI) / (this.N - 1);
     return Array.from({ length: this.N }, (_, i) => i * step);
   }
-
   semi_latus_rectum() {
     return this.SEMI_MAJOR_AXIS * (1 - this.ECCENTRICITY ** 2);
   }
@@ -72,7 +75,7 @@ class Orbit {
 
       footprint.push({ latitude, longitude });
     }
-    
+
     return footprint;
   }
 }
