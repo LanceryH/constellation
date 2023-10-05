@@ -4,10 +4,11 @@ class Orbit {
     this.MUE = 3.986e5;
     this.EARTH_MASS = 5.972e24;
     this.EARTH_RADIUS = 6371;
+    this.N = 200;
     this.MEAN_MOTION = MEAN_MOTION;
     this.ECCENTRICITY = ECCENTRICITY;
     this.INCLINATION = INCLINATION;
-    this.T = this.period_orbit();
+    this.PERIOD_ORBIT = this.period_orbit();
     this.MEAN_MOTION_SI = this.mean_motion_si();
     this.SEMI_MAJOR_AXIS = this.semi_major_axis();
     this.SEMI_LATUS_RECTUM = this.semi_latus_rectum();
@@ -15,7 +16,7 @@ class Orbit {
     this.RADIAL_DISTANCE_LIST = this.radial_distance();
   }
   mean_motion_si() {
-    return (2 * Math.PI) / this.T;
+    return (2 * Math.PI) / this.PERIOD_ORBIT;
   }
   period_orbit() {
     return (1 / this.MEAN_MOTION) * 24 * 60 * 60;
@@ -27,12 +28,8 @@ class Orbit {
     );
   }
   true_anomaly() {
-    const n = 200;
-    if (n <= 1) {
-      return [0]; // Special case for n = 1
-    }
-    const step = (2 * Math.PI) / (n - 1);
-    return Array.from({ length: n }, (_, i) => i * step);
+    const step = (2 * Math.PI) / (this.N - 1);
+    return Array.from({ length: this.N }, (_, i) => i * step);
   }
 
   semi_latus_rectum() {
@@ -49,7 +46,6 @@ class Orbit {
   }
 
   plotOrbit() {
-    //scale(0.01);
     strokeWeight(1);
     stroke(255);
     noFill();
@@ -58,15 +54,11 @@ class Orbit {
       const r = this.RADIAL_DISTANCE_LIST[i];
       const theta = this.TRUE_ANOMALY_LIST[i];
       const [x, y, z] = this.polar_to_cartesian(r, theta);
-      //console.log(z);
       vertex(x, y, z);
     }
     endShape(CLOSE);
   }
   calculateFootprint() {
-    // Assuming your orbit is geocentric, you can calculate the footprint
-    // by projecting each point on the orbit's trajectory onto the Earth's surface.
-
     const footprint = [];
 
     for (let i = 0; i < this.TRUE_ANOMALY_LIST.length; i++) {
@@ -80,7 +72,7 @@ class Orbit {
 
       footprint.push({ latitude, longitude });
     }
-
+    
     return footprint;
   }
 }
