@@ -21,12 +21,6 @@ function setup() {
     5.972e24,
     6371
   );
-  moon = new CelestialBody(
-    "Moon",
-    loadImage("map_moon.jpg"),
-    7.34767309e22,
-    1737
-  );
 
   //we create the checkbox
   checkbox = createCheckbox("show poles", false);
@@ -66,12 +60,13 @@ function draw() {
   stroke(255);
   rotateY(0);
   list_object[sel.value()].plotOrbit();
+  list_object[sel.value()].calculateFootprint();
 
   strokeWeight(1);
   stroke(255);
   texture(map_earth);
   rotateY(millis() / 10000);
-  earth.show();
+  //earth.show();
 
   if (checkbox.checked()) {
     earth.show_north_south();

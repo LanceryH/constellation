@@ -63,7 +63,10 @@ class Orbit {
   }
   calculateFootprint() {
     const footprint = [];
-
+    strokeWeight(1);
+    stroke(255);
+    noFill();
+    beginShape();
     for (let i = 0; i < this.TRUE_ANOMALY_LIST.length; i++) {
       const r = this.RADIAL_DISTANCE_LIST[i];
       const theta = this.TRUE_ANOMALY_LIST[i];
@@ -74,8 +77,9 @@ class Orbit {
       const longitude = Math.atan2(y, x) * (180 / Math.PI);
 
       footprint.push({ latitude, longitude });
+      vertex(latitude * 10, longitude * 10);
     }
-
+    endShape(CLOSE);
     return footprint;
   }
 }
